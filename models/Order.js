@@ -20,14 +20,28 @@ const OrderSchema = new mongoose.Schema({
     phone: String,
     notes: String,
   },
-  orderStatus: String,
-  paymentMethod: String,
-  paymentStatus: String,
+  orderStatus: {
+    type: String,
+    default: "pending", // Default status for new orders
+  },
+  paymentMethod: {
+    type: String,
+    default: "CashOnDelivery", // Default payment method
+  },
+  paymentStatus: {
+    type: String,
+    default: "pending", // Payment will be collected on delivery
+  },
   totalAmount: Number,
-  orderDate: Date,
-  orderUpdateDate: Date,
-  paymentId: String,
-  payerId: String,
+  orderDate: {
+    type: Date,
+    default: Date.now, // Automatically set to the current date
+  },
+  orderUpdateDate: {
+    type: Date,
+    default: Date.now, // Automatically set to the current date
+  },
+  paymentId: String, // Optional: Can be removed if not needed
+  payerId: String, // Optional: Can be removed if not needed
 });
-
 module.exports = mongoose.model("Order", OrderSchema);
